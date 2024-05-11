@@ -1,6 +1,24 @@
-<h1>My name is Meetkumar</h1>
+{% comment %} <h1>My name is Meetkumar</h1> {% endcomment %}
 {% comment %} <img src="{{'testtshirt.png' | asset_url }}"/> {% endcomment %}
-{% for link in linklists.main-menu.links %}
+{% comment %} {% for link in linklists.main-menu.links %}
   <!-- menu content -->
+  <li>{link}</li>
   
-{% endfor %}
+{% endfor %} {% endcomment %}
+
+<nav class="main-navigation">
+  <ul>
+    {% for link in linklists.main-menu.links %}
+      <li>
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        {% if link.links.size > 0 %}
+          <ul class="sub-menu">
+            {% for sub_link in link.links %}
+              <li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
